@@ -2,125 +2,45 @@ package controller;
 
 import model.Laboratory;
 import model.Student;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by Madalina on 5/10/2017.
+ * Created by horea on 04/04/2017.
  */
 public class LaboratoriesControllerTest {
+    Student student = new Student("abcd1234", "Student", 731);
+    Laboratory laboratory = new Laboratory(5, "04/05/2017", 6, "abcd1234");
+    LaboratoriesController controller = new LaboratoriesController("students.txt", "laboratories.txt");
 
-
-    private Student student;
-    private Student student2;
-
-    private LaboratoriesController controller;
-    private List<Student> allstudents;
-    private List<Student> stud;
-    private Laboratory laboratory;
-
-    @Before
-    public void setUp() throws Exception {
-        controller = new LaboratoriesController("studentfile.txt", "laboratoriesfile.txt");
-        student = new Student("nmig0026", "Nemes", "Madalina", 731);
-        student2 = new Student("gjig0013", "Gozner", "Judith", 731);
-        allstudents = new ArrayList<Student>();
-        laboratory = new Laboratory(12, "12/12/2018", 13, "nmig0026");
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
+    public LaboratoriesControllerTest() throws ParseException {
     }
 
     @Test
     public void saveStudent() throws Exception {
-        if (controller.saveStudent(student)) {
-            stud = new ArrayList<Student>();
-            stud = controller.getallStudents();
-            Student oneStudent = stud.get(stud.size() - 1);
-            assertEquals(student.equals(oneStudent), true);
-        } else throw new Exception("Studentul nu a putut fi salvat");
-
+        assertEquals(controller.saveStudent(student), true);
     }
-
-
-    //assertTrue(controller.saveStudent(student));
-
 
     @Test
     public void saveLaboratory() throws Exception {
-        if (controller.saveLaboratory(laboratory)) {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("laboratoriesfile.txt"));
-            String line = null;
-            Laboratory labor = null;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] temp = line.split(" ");
-                labor = new Laboratory(Integer.parseInt(temp[0]), temp[1], Integer.parseInt(temp[2]), Float.parseFloat(temp[3]), temp[4]);
-            }
-            assertEquals(laboratory.toString(), labor.toString());
-            //System.out.println(laboratory);
-            //System.out.println(labor);}
-            //     12 12/12/2018 13 1.0 nmig0026
-
-        }
+        assertEquals(controller.saveLaboratory(laboratory), true);
     }
 
     @Test
     public void addGrade() throws Exception {
-        controller.saveStudent(student);
-        controller.saveLaboratory(laboratory);
-        if (controller.addGrade(laboratory.getStudentRegNumber(), Integer.toString(laboratory.getNumber()), 6f)) {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("laboratoriesfile.txt"));
-            String line = null;
-            Laboratory labor = null;
-
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] temp = line.split(" ");
-                labor = new Laboratory(Integer.parseInt(temp[0]), temp[1], Integer.parseInt(temp[2]), Float.parseFloat(temp[3]), temp[4]);
-            }
-            laboratory.setGrade(6f);
-            assertEquals(laboratory.toString(), labor.toString());
-            System.out.println(laboratory);
-            System.out.println(labor);
-
-
-        }
-
-
+        float grade = 4;
+        assertEquals(controller.addGrade("abcd1234", "5", grade), true);
     }
 
     @Test
     public void passedStudents() throws Exception {
-        LaboratoriesController contr = new LaboratoriesController("newstudfile.txt", "newstudfile.txt");
-        contr.saveStudent(student);
-        contr.saveStudent(student2);
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("newstudfile.txt"));
-        String line = null;
-        Student student5 = null;
-        List<Student> passStud = new ArrayList<Student>();
-
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] temp = line.split(" ");
-            student5 = new Student(temp[0], temp[1], temp[2], Integer.parseInt(temp[3]));
-        }
-        // assertEquals();
-        //
+        List<Student> passedStudents = new ArrayList();
+        assertEquals(controller.passedStudents(), passedStudents);
     }
 
-    @Test
-    public void getallStudents() throws Exception {
-
-
-    }
 }

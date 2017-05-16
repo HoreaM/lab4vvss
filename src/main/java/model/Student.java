@@ -3,19 +3,15 @@ package model;
 public class Student {
     private String regNumber;
     private String name;
-
-    private String surname;
     private int group;
 
     public Student() {
     }
 
-    public Student(String regNumber, String surname, String name, int group) {
+    public Student(String regNumber, String name, int group) {
         this.regNumber = regNumber;
         this.name = name;
-        this.surname = surname;
         this.group = group;
-
     }
 
     public String getRegNumber() {
@@ -34,14 +30,6 @@ public class Student {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public int getGroup() {
         return group;
     }
@@ -52,7 +40,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return regNumber + " " + surname + " " + name + " " + group;
+        return regNumber + ";" + name + ";" + group;
     }
 
     @Override

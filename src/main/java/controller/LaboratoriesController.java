@@ -15,7 +15,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class LaboratoriesController {
-
     private FileDataPersistence studentPersistence = new FileDataPersistence(
             "students.txt");
     private FileDataPersistence laboratoryPersistence = new FileDataPersistence(
@@ -35,8 +34,8 @@ public class LaboratoriesController {
         }
     }
 
-    public boolean saveLaboratory(Laboratory laboratory)throws IOException, ParseException {
-        if (Validator.validateLaboratory(laboratory, getallStudents())) {
+    public boolean saveLaboratory(Laboratory laboratory) {
+        if (Validator.validateLaboratory(laboratory)) {
             this.laboratoryPersistence.saveLaboratory(laboratory);
             return true;
         } else {
@@ -44,10 +43,10 @@ public class LaboratoriesController {
         }
     }
 
-    public boolean addGrade(String nrReg, String labNumber, float grade)
+    public boolean addGrade(String student, String labNumber, float grade)
             throws NumberFormatException, IOException, ParseException {
-        if (Validator.validateGrade(grade) && Validator.existNrReg(nrReg,getallStudents())) {
-            this.laboratoryPersistence.addGrade(nrReg, labNumber, grade);
+        if (Validator.validateGrade(grade)) {
+            this.laboratoryPersistence.addGrade(student, labNumber, grade);
             return true;
         } else {
             return false;
@@ -71,7 +70,7 @@ public class LaboratoriesController {
             for (Laboratory laboratory : entry.getValue()) {
                 midGrade = (midGrade + laboratory.getGrade()) / 2;
             }
-            System.out.println(midGrade);
+//            System.out.println(midGrade);
             if (midGrade >= 5) {
                 Student student = new Student();
                 student.setRegNumber(entry.getKey());
@@ -81,10 +80,5 @@ public class LaboratoriesController {
         }
 
         return passedStudents;
-    }
-
-    public List<Student> getallStudents() throws NumberFormatException,
-            IOException, ParseException {
-        return studentPersistence.getStudentsList();
     }
 } 

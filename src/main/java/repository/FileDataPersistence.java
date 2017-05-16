@@ -30,31 +30,35 @@ public class FileDataPersistence {
         this.file = file;
     }
 
-    public void saveStudent(Student student) {
+    public boolean saveStudent(Student student) {
         try {
             BufferedWriter writer;
             writer = new BufferedWriter(new FileWriter(file, true));
             writer.write(student.toString() + "\n");
             writer.close();
+            return true;
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
     // No check if laboratory is unique
-    public void saveLaboratory(Laboratory laboratory) {
+    public boolean saveLaboratory(Laboratory laboratory) {
         BufferedWriter writter;
         try {
             writter = new BufferedWriter(new FileWriter(file, true));
             writter.write(laboratory.toString() + "\n");
             writter.close();
+            return true;
         } catch (IOException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
     // Ambiguous what field of "Student" should be passed
-    public void addGrade(String student, String labNumber, float grade)
+    public boolean addGrade(String student, String labNumber, float grade)
             throws IOException, NumberFormatException, ParseException {
         File fileA = new File(file);
         File fileB = new File("temp");
@@ -83,6 +87,7 @@ public class FileDataPersistence {
 
         fileA.delete();
         fileB.renameTo(fileA);
+        return true;
     }
 
     public Map<String, List<Laboratory>> getLaboratoryMap()
@@ -107,8 +112,7 @@ public class FileDataPersistence {
                 laboratoryMap.get(laboratory.getStudentRegNumber()).add(
                         laboratory);
             }
-        }/*int number, String date, int problemNumber, float grade,
-                      String studentRegNumber) */
+        }
         return laboratoryMap;
     }
 
@@ -121,8 +125,8 @@ public class FileDataPersistence {
         String line = null;
 
         while ((line = reader.readLine()) != null) {
-            String[] temp = line.split(" ");
-            Student student = new Student(temp[0], temp[1], temp[2], Integer.valueOf(temp[3]));
+            String[] temp = line.split(";");
+            Student student = new Student(temp[0], temp[1], Integer.valueOf(temp[2]));
             allStudentsList.add(student);
         }
 

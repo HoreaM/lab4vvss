@@ -3,7 +3,7 @@ package model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-/**/
+
 public class Laboratory {
     // Ambiguous names : number and problem number
     private int number;
@@ -21,7 +21,7 @@ public class Laboratory {
         this.studentRegNumber = studentRegNumber;
     }
 
-    public Laboratory(int number, String date, int problemNumber, float grade,
+    public Laboratory(int number, String date, int problemNumber, Float grade,
                       String studentRegNumber) throws ParseException {
         this.number = number; // problemNumber assigned to Number
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
