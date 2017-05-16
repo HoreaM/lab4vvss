@@ -26,10 +26,10 @@ public class LaboratoriesControllerTest {
         assertEquals(controller.saveStudent(student), true);
     }
 
-    @Test
-    public void saveLaboratory() throws Exception {
-        assertEquals(controller.saveLaboratory(laboratory), true);
-    }
+//    @Test
+//    public void saveLaboratory() throws Exception {
+//        assertEquals(controller.saveLaboratory(laboratory), true);
+//    }
 
     @Test
     public void addGrade() throws Exception {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab4vvss.iml" filepath="$PROJECT_DIR$/.idea/modules/lab4vvss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab4vvss_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab4vvss_main.iml" group="lab4vvss" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab4vvss_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab4vvss_test.iml" group="lab4vvss" />
+    </modules>
+  </component>
+</project>
