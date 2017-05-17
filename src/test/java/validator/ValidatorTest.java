@@ -58,7 +58,7 @@ public class ValidatorTest {
         float gradeValid = 5;
         assertEquals(Validator.validateGrade(gradeValid), true);
 
-        float gradeInvalid = -1;
+        float gradeInvalid = 5;
         assertEquals(Validator.validateGrade(gradeInvalid), false);
 
         float gradeInvalid2 = 0;
